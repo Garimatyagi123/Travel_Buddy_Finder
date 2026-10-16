@@ -1,0 +1,1 @@
+{% extends 'base.html' %}{% block title %}{{ code }} — Travel Buddy Finder{% endblock %}{% block content %}<section class="empty-state error-state"><div class="eyebrow">A LITTLE DETOUR</div><h1>{{ code }}</h1><h2>{{ message }}</h2><a class="btn btn-dark mt-3" href="{{ url_for('home') }}">Back home ↗</a></section>{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Maps & routes — Travel Buddy Finder{% endblock %}
+{% block content %}
+<section class="page-top"><div class="container"><div class="eyebrow">FIND YOUR WAY</div><h1>Maps for the journey ahead.</h1><p>Explore destinations, find nearby places, and open driving directions in Google Maps.</p></div></section>
+<section class="section-pad pt-4"><div class="container">
+  <div class="panel-form mb-4">
+    <form method="get" action="{{ url_for('google_maps') }}" class="row g-3 align-items-end">
+      <div class="col-md-5"><label class="form-label" for="destination">Destination</label><input id="destination" class="form-control" name="destination" value="{{ destination }}" placeholder="e.g. Nainital, Uttarakhand"></div>
+      <div class="col-md-4"><label class="form-label" for="start_location">Starting location (optional)</label><input id="start_location" class="form-control" name="start_location" value="{{ start_location }}" placeholder="e.g. Ghaziabad, Uttar Pradesh"></div>
+      <div class="col-md-3"><button class="btn btn-dark w-100" type="submit">Show destination ↗</button></div>
+      <div class="col-12"><label class="form-label" for="search_query">Find places / attractions</label><div class="input-group"><input id="search_query" class="form-control" name="search_query" value="{{ search_query }}" placeholder="e.g. cafes near Nainital lake"><button class="btn btn-outline-dark" type="submit">Search places</button></div></div>
+    </form>
+  </div>
+  <div class="workspace-panel mb-4"><div class="section-head compact"><div><div class="eyebrow">LIVE GOOGLE MAP</div><h2>{{ map_query }}</h2></div><a class="btn btn-outline-dark" href="{{ places_url }}" target="_blank" rel="noopener noreferrer">Open Google Maps ↗</a></div>
+    <div style="width:100%;height:clamp(320px,55vh,560px);overflow:hidden;border-radius:16px;background:#eef2ed"><iframe title="Google Map showing {{ map_query }}" src="{{ map_embed_url }}" width="100%" height="100%" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>
+    <p class="muted mt-3 mb-0">The map and place results are provided by Google Maps. For full navigation, live traffic and route choices, open Google Maps.</p>
+  </div>
+  {% if destination %}<div class="workspace-panel"><div class="eyebrow">ROUTE PLANNER</div><h2>{% if start_location %}{{ start_location }} → {{ destination }}{% else %}Directions to {{ destination }}{% endif %}</h2><p class="muted">Google Maps will calculate the current route, distance, estimated travel time and available route options.</p><a class="btn btn-dark" href="{{ directions_url }}" target="_blank" rel="noopener noreferrer">Get directions in Google Maps ↗</a></div>{% else %}<div class="workspace-panel"><h2>Plan a route</h2><p class="muted">Enter a destination and, if needed, your starting point to open directions with route distance and estimated travel time in Google Maps.</p></div>{% endif %}
+</div></section>
+{% endblock %}
